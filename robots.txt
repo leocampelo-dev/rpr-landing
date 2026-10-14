@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://recuperapisosrpr.com/sitemap.xml
