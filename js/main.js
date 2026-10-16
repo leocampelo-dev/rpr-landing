@@ -124,34 +124,4 @@
     window.addEventListener('resize', buildDots);
     buildDots(); play();
   });
-
-  /* ---------- 5. Carrossel de avaliações (troca com fade, autoplay 5s) ---------- */
-  document.querySelectorAll('[data-reviews]').forEach(function (root) {
-    var items = Array.prototype.slice.call(root.querySelectorAll('.review'));
-    var dotsBox = root.querySelector('[data-dots]');
-    var idx = 0, paused = false, inView = false, timer = null;
-    var dots = items.map(function (_, i) {
-      var b = document.createElement('button');
-      b.type = 'button'; b.setAttribute('aria-label', 'Ver avaliação ' + (i + 1));
-      b.addEventListener('click', function () { show(i); });
-      dotsBox.appendChild(b); return b;
-    });
-    function show(i) {
-      idx = (i + items.length) % items.length;
-      items.forEach(function (it, n) { it.classList.toggle('is-active', n === idx); it.setAttribute('aria-hidden', n === idx ? 'false' : 'true'); });
-      dots.forEach(function (d, n) { d.setAttribute('aria-current', n === idx ? 'true' : 'false'); });
-    }
-    root.querySelector('[data-prev]').addEventListener('click', function () { show(idx - 1); });
-    root.querySelector('[data-next]').addEventListener('click', function () { show(idx + 1); });
-    ['mouseenter', 'focusin', 'touchstart'].forEach(function (t) { root.addEventListener(t, function () { paused = true; }, { passive: true }); });
-    ['mouseleave', 'focusout'].forEach(function (t) { root.addEventListener(t, function () { paused = false; }); });
-    root.addEventListener('touchend', function () { setTimeout(function () { paused = false; }, 6000); }, { passive: true });
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (en) { inView = en[0].isIntersecting; }, { threshold: 0.3 }).observe(root);
-    } else { inView = true; }
-    if (!reduceMotion) {
-      timer = setInterval(function () { if (!paused && inView && !document.hidden) show(idx + 1); }, 5000);
-    }
-    show(0);
-  });
 })();
