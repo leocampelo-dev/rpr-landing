@@ -1,0 +1,117 @@
+/* ==========================================================
+   RPR — Efeitos
+   Carregado depois de styles.css. É uma camada extra: se este arquivo e o effects.js
+   forem removidos, a página continua funcionando.
+   ========================================================== */
+
+/* ---------- 1. CAMADAS (z-index): 0 foto · 1 canvas da sujeira · 2 overlays · 4 conteúdo ---------- */
+.section > .container, .section > .marquee, .hero__grid { z-index: 4; }
+.hero::before, .section--photo::before, .section--cta::before,
+.hero::after, .section--photo::after, .section--cta::after { z-index: 2; }
+
+/* ---------- 2. FUNDO QUE LIMPA COM O MOUSE ---------- */
+.clean-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1;
+  filter: var(--photo-filter); pointer-events: none;
+}
+[data-clean] { touch-action: pan-y; }
+/* Cursor politriz: o JS liga a classe .has-tool só em mouse. Sobre links e botões volta o cursor normal. */
+.has-tool [data-clean] { cursor: none; }
+.has-tool [data-clean] a, .has-tool [data-clean] button { cursor: pointer; }
+.tool-cursor {
+  position: fixed; left: 0; top: 0; z-index: 90; pointer-events: none;
+  opacity: 0; transition: opacity 160ms ease; will-change: transform;
+  filter: drop-shadow(0 10px 10px rgba(1, 1, 1, 0.38));
+}
+.tool-cursor.is-on { opacity: 1; }
+.tool-cursor img { display: block; width: 100%; height: auto; }
+@media (prefers-reduced-motion: reduce) { .tool-cursor { display: none; } }
+/* Antes do canvas estar pronto a imagem limpa fica escondida, para não piscar limpo -> sujo. */
+.js [data-clean]:not(.is-ready) .section-bg { opacity: 0; }
+.js [data-clean] .section-bg { transition: opacity 500ms ease; }
+
+/* Hero: overlay mais leve para o efeito aparecer, com leitura garantida do lado do texto */
+.hero::before {
+  background:
+    linear-gradient(90deg, rgba(10, 15, 46, 0.9) 0%, rgba(10, 15, 46, 0.8) 32%, rgba(10, 15, 46, 0.42) 56%, rgba(10, 15, 46, 0.06) 82%, rgba(10, 15, 46, 0) 100%),
+    linear-gradient(to top, #0A0F2E 0%, transparent 16%),
+    linear-gradient(to bottom, rgba(10, 15, 46, 0.5) 0%, transparent 12%);
+}
+.hero::after { background: transparent; }
+/* A foto da hero é clara: sem o filtro escurecedor padrão, para o contraste entre sujo e limpo aparecer. */
+.hero .section-bg, .hero .clean-canvas { filter: none; }
+.hero .section-bg { object-position: 62% 60%; }
+@media (max-width: 899px) {
+  .hero::before {
+    background:
+      linear-gradient(to bottom, rgba(10, 15, 46, 0.9) 0%, rgba(10, 15, 46, 0.78) 50%, rgba(10, 15, 46, 0.4) 100%),
+      linear-gradient(to top, #0A0F2E 0%, transparent 16%);
+  }
+}
+@media (max-width: 767px) { .hero .section-bg { object-position: 86% 100%; } }
+.hero__title, .hero__sub { text-shadow: 0 2px 18px rgba(10, 15, 46, 0.6); }
+@media (min-width: 900px) {
+  .hero { min-height: min(86vh, 820px); display: flex; flex-direction: column; justify-content: center; }
+}
+.section--cta::after { background: rgba(10, 15, 46, 0.55); }
+
+.clean-hint {
+  position: absolute; left: 50%; bottom: calc(var(--overlap) + 22px); z-index: 4; transform: translateX(-50%);
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: var(--radius-btn);
+  background: rgba(10, 15, 46, 0.7); backdrop-filter: blur(8px); border: 1px solid var(--color-border);
+  font-size: 13px; font-weight: 500; color: var(--color-text); white-space: nowrap; pointer-events: none;
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+.section--cta .clean-hint { bottom: 22px; }
+.clean-hint .icon { width: 18px; height: 18px; color: var(--color-cta); }
+.clean-hint.is-hidden { opacity: 0; transform: translate(-50%, 10px); }
+@media (max-width: 899px) {
+  .clean-hint { left: 16px; bottom: calc(var(--overlap) + 14px); transform: none; font-size: 12px; }
+  .section--cta .clean-hint { bottom: 14px; }
+  .clean-hint.is-hidden { transform: translateY(10px); }
+  .hero { padding-bottom: calc(var(--section-py) + var(--overlap) + 40px); } /* espaço para a dica não cobrir as fotos */
+}
+
+/* ---------- 3. ENTRADA: depois de revelado, o hover dos cards volta a ser rápido ---------- */
+.js .card.reveal.is-done { transition: transform 250ms ease, border-color 250ms ease; transition-delay: 0ms; }
+
+/* ---------- 4. HEADER: barra de progresso da página ---------- */
+.progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; pointer-events: none; }
+.progress span { display: block; height: 100%; width: 100%; background: var(--color-cta); transform-origin: left center; transform: scaleX(var(--p, 0)); }
+
+/* ---------- 5. COMO FUNCIONA: linha que enche com a rolagem ---------- */
+.steps { position: relative; --prog: 0; }
+.steps li:not(:last-child)::before { display: none; }
+.steps::before { content: ""; position: absolute; left: 23px; top: 26px; bottom: 46px; width: 2px; background: rgba(235, 235, 235, 0.14); border-radius: 2px; }
+.steps::after {
+  content: ""; position: absolute; left: 23px; top: 26px; bottom: 46px; width: 2px; border-radius: 2px;
+  background: var(--color-cta); transform-origin: top; transform: scaleY(var(--prog));
+}
+.steps__num { position: relative; z-index: 1; transition: background 400ms ease, color 400ms ease, border-color 400ms ease; background: var(--color-bg); }
+.steps li.is-active .steps__num { background: var(--color-cta); color: var(--color-cta-text); border-color: var(--color-cta); }
+
+/* ---------- 6. Sem movimento ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .clean-hint { transition: none; }
+  .steps::after { transform: scaleY(1); }
+}
+
+/* ---------- 7. POR QUE A RPR: funcionário recortado ---------- */
+#por-que-rpr .why { max-width: 760px; }
+.why__stage { position: relative; z-index: 3; width: min(300px, 78%); margin: 12px auto calc(var(--section-py) * -1); }
+.why__stage::before {                      /* luz suave atrás e sombra no chão */
+  content: ""; position: absolute; inset: 6% -14% 0; z-index: -1; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(235, 235, 235, 0.11), rgba(235, 235, 235, 0) 72%);
+}
+.why__stage::after {
+  content: ""; position: absolute; left: 4%; right: -2%; bottom: -2%; height: 7%; z-index: -1; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(1, 1, 1, 0.55), rgba(1, 1, 1, 0));
+}
+.why__stage img { display: block; width: 100%; height: auto; filter: drop-shadow(0 18px 24px rgba(1, 1, 1, 0.45)); }
+@media (min-width: 960px) {
+  #por-que-rpr .why { max-width: min(760px, 58%); }
+  .why__stage {
+    position: absolute; right: max(24px, calc((100% - 1200px) / 2)); bottom: 28px; margin: 0;
+    width: clamp(270px, 31vw, 440px); z-index: 3;
+  }
+}

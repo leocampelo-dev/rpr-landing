@@ -9,7 +9,12 @@
   if ('IntersectionObserver' in window && !reduceMotion) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+        if (e.isIntersecting) {
+          var t = e.target;
+          t.classList.add('is-visible'); io.unobserve(t);
+          // depois da entrada, o hover dos cards volta a ser rápido (ver effects.css)
+          setTimeout(function () { t.classList.add('is-done'); }, 1400);
+        }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     revealEls.forEach(function (el) { io.observe(el); });
