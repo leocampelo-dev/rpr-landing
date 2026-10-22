@@ -247,7 +247,8 @@ button { font: inherit; color: inherit; }
   border: 1px solid var(--color-border);
   font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.2;
 }
-.tag--accent { background: var(--color-cta); color: var(--color-cta-text); border-color: transparent; }
+/* selos "Depois do teste" e "Depois": texto gelo no fundo verde */
+.tag--accent { background: var(--color-cta); color: var(--color-text); border-color: transparent; }
 
 /* Estrelas e prova do Google */
 .proof { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 15px; }
@@ -367,7 +368,7 @@ button { font: inherit; color: inherit; }
 .sol-grid { display: grid; gap: var(--gap); grid-template-columns: 1fr; }
 @media (min-width: 640px) { .sol-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1100px) { .sol-grid { grid-template-columns: repeat(3, 1fr); } }
-.sol { overflow: hidden; display: flex; flex-direction: column; }
+.sol { position: relative; overflow: hidden; display: flex; flex-direction: column; cursor: pointer; }
 .sol > img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; filter: var(--photo-filter); }
 .sol__body { flex: 1; display: flex; flex-direction: column; gap: 12px; padding: 20px; }
 .sol__body p { color: var(--color-muted); font-size: 16px; } /* mesmo tamanho do texto dos outros cards (.card__body p) */
@@ -384,9 +385,14 @@ button { font: inherit; color: inherit; }
   transition: text-decoration-color 200ms ease;
 }
 .sol__more:hover { text-decoration-color: currentColor; }
+/* o botão "Ver serviços" estica uma camada invisível sobre o card inteiro: clicar em qualquer lugar abre os detalhes */
+.sol__more::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.sol:hover .sol__more { text-decoration-color: currentColor; }
+.sol:hover .sol__more .icon { transform: translateX(3px); }
 .sol__more .icon { width: 18px; height: 18px; transition: transform 200ms ease; }
 .sol__more:hover .icon { transform: translateX(3px); }
 .sol__cta {
+  position: relative; z-index: 2; /* fica acima da camada clicável: abre o WhatsApp, não os detalhes */
   display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px;
   border: 1px solid rgba(37, 211, 102, 0.5); border-radius: var(--radius-btn);
   color: var(--color-cta); font-weight: 700; font-size: 15px; text-decoration: none;
@@ -405,6 +411,22 @@ button { font: inherit; color: inherit; }
 .sol-dialog[open] { display: flex; flex-direction: column; }
 .sol-dialog::backdrop { background: rgba(5, 8, 28, 0.72); backdrop-filter: blur(3px); }
 html:has(.sol-dialog[open]) { overflow: hidden; }
+/* Abertura suave: o painel sobe e cresce um pouco enquanto aparece; o fundo escurece junto.
+   No celular ele sobe um pouco mais (sem zoom), como uma folha vindo de baixo. */
+.sol-dialog { --sol-from: translateY(16px) scale(0.96); }
+@media (max-width: 767px) { .sol-dialog { --sol-from: translateY(48px); } }
+.sol-dialog[open] { animation: sol-in 360ms cubic-bezier(0.22, 1, 0.36, 1); }
+.sol-dialog[open]::backdrop { animation: sol-fade-in 360ms ease; }
+/* Fechamento (classe colocada pelo JS antes de fechar de verdade) */
+.sol-dialog.is-closing { animation: sol-out 200ms ease forwards; }
+.sol-dialog.is-closing::backdrop { animation: sol-fade-out 200ms ease forwards; }
+@keyframes sol-in { from { opacity: 0; transform: var(--sol-from); } }
+@keyframes sol-out { to { opacity: 0; transform: var(--sol-from); } }
+@keyframes sol-fade-in { from { opacity: 0; } }
+@keyframes sol-fade-out { to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .sol-dialog[open], .sol-dialog[open]::backdrop { animation: none; }
+}
 .sol-dialog__head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 20px; border-bottom: 1px solid var(--color-border); }
 .sol-dialog__head h3 { font-size: var(--fs-h3); }
 .sol-dialog__close {

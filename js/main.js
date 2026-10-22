@@ -127,15 +127,28 @@
 
   /* ---------- 5. Lista completa de cada serviço (dobra 3): botão "Ver serviços" abre o <dialog> ---------- */
   // O <dialog> nativo já prende o foco, fecha com Esc e devolve o foco ao botão.
+  // Ao fechar, toca a animação de saída (.is-closing, 200ms no CSS) e só depois fecha de verdade.
   document.querySelectorAll('[data-dialog]').forEach(function (btn) {
     var dlg = document.getElementById(btn.getAttribute('data-dialog'));
     if (!dlg || typeof dlg.showModal !== 'function') return;
+    var closeTimer;
+    function closeDlg() {
+      if (reduceMotion) { dlg.close(); return; }
+      if (dlg.classList.contains('is-closing')) return;
+      dlg.classList.add('is-closing');
+      closeTimer = setTimeout(function () { dlg.close(); }, 200);
+    }
     btn.addEventListener('click', function () {
       dlg.showModal(); btn.setAttribute('aria-expanded', 'true');
     });
-    dlg.addEventListener('close', function () { btn.setAttribute('aria-expanded', 'false'); });
-    dlg.querySelector('[data-close]').addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('close', function () {
+      clearTimeout(closeTimer); dlg.classList.remove('is-closing');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+    // Esc também usa a animação de saída
+    dlg.addEventListener('cancel', function (e) { e.preventDefault(); closeDlg(); });
+    dlg.querySelector('[data-close]').addEventListener('click', closeDlg);
     // Clique fora do painel (no fundo escurecido) também fecha
-    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) closeDlg(); });
   });
 })();
