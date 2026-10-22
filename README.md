@@ -32,11 +32,13 @@ Os principais:
 - **Seções azul-marinho lisas** (Serviços, Como funciona, Por que a RPR, Quem atendemos, Dúvidas): gradeado sutil no fundo, que some em direção às bordas (`.section.bg-navy::before`).
 - **Serviços**: o fundo começa no azul do topo e clareia aos poucos, sem corte atrás do card de "Trocar ou recuperar".
 - **Avaliações (dobra 7)**: refeita no estilo painel claro com 3 cards por vez (1 no celular), selos "Nota 5,0" e "+20 avaliações", título "O que nossos clientes dizem sobre a RPR" e botão "Quero ser o próximo caso de sucesso". Usa o mesmo carrossel dos Resultados (`[data-carousel]` no `js/main.js`); o carrossel antigo de avaliações foi removido.
+- **Serviços (dobra 3)**: agora "Nossas soluções", com 6 cards com foto (restauração de pisos e revestimentos, pós-obra, inox e ACM, vidros, limpeza profissional, pós-incêndio), seguindo a "Listagem de serviços RPR". Cada card mostra até 3 exemplos; o botão "Ver serviços" abre um painel (`<dialog>`) com a lista completa e os intervalos de manutenção. Rejuntamento e impermeabilização ficam dentro de restauração; capacitação de equipe, dentro de limpeza profissional. Cada "Solicitar avaliação" abre o WhatsApp com mensagem do serviço e `cta_location` próprio (`servicos-restauracao`, `servicos-vidros`...).
 - **Faixa de números** (`.proofband`): "1M m² recuperados", "+10 anos de experiência", "100% de satisfação", entre Resultados e Como funciona.
 
 ## O que falta você trocar (nesta ordem)
 Já estão com foto real: topo (par antes/depois sobre foto de obra clara), "Trocar ou recuperar", "Como funciona", "Serviços", "Por que a RPR" (funcionário recortado, `funcionario-politriz.webp`), fundo do topo (`hero-bg-obra.jpg` no desktop, `hero-bg-obra-mobile.jpg` no celular) e do CTA, terraço (para quem atendemos), 4 pares de resultados, logo, favicon e imagem de compartilhamento.
 1. **Fotos que ainda são provisórias** (cinza com o nome escrito): `atende-residencial.jpg`, `atende-comercio-industria.jpg`, `atende-construtoras.jpg`. Salve a foto real **com o mesmo nome** por cima (800x600, deitada).
+   Na dobra 3 (Nossas soluções): `servico-inox-acm.jpg`, `servico-vidros.jpg`, `servico-limpeza.jpg`, `servico-pos-incendio.jpg`. Mesmo esquema, mas **1200x675** (deitada, 16:9). Depois confira o `alt` de cada uma no `index.html`.
 2. **Resultados 03 e 04** (rampa e calçada) vieram de artes do Instagram, em baixa resolução. Troque por fotos originais, 800x1000 (em pé), mesmo enquadramento e luz no antes e no depois.
 3. **Mais pares de resultados**: copie um `<li class="carousel__slide card">` inteiro na dobra 4, troque os nomes das imagens e a legenda.
 4. **Legendas dos pares**: hoje só dizem a superfície ("Bancada de granito preto"). Acrescente o serviço feito.

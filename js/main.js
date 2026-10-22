@@ -124,4 +124,18 @@
     window.addEventListener('resize', buildDots);
     buildDots(); play();
   });
+
+  /* ---------- 5. Lista completa de cada serviço (dobra 3): botão "Ver serviços" abre o <dialog> ---------- */
+  // O <dialog> nativo já prende o foco, fecha com Esc e devolve o foco ao botão.
+  document.querySelectorAll('[data-dialog]').forEach(function (btn) {
+    var dlg = document.getElementById(btn.getAttribute('data-dialog'));
+    if (!dlg || typeof dlg.showModal !== 'function') return;
+    btn.addEventListener('click', function () {
+      dlg.showModal(); btn.setAttribute('aria-expanded', 'true');
+    });
+    dlg.addEventListener('close', function () { btn.setAttribute('aria-expanded', 'false'); });
+    dlg.querySelector('[data-close]').addEventListener('click', function () { dlg.close(); });
+    // Clique fora do painel (no fundo escurecido) também fecha
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  });
 })();
