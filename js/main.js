@@ -151,4 +151,42 @@
     // Clique fora do painel (no fundo escurecido) também fecha
     dlg.addEventListener('click', function (e) { if (e.target === dlg) closeDlg(); });
   });
+
+  /* ---------- 6. Fotos que passam sozinhas nos cards de serviço (dobra 3) ---------- */
+  // Desliza uma foto por vez, devagar. A primeira foto é copiada para o fim: ao chegar nela, volta ao
+  // início sem animação e o giro parece contínuo. Só roda com o card na tela e a aba aberta.
+  document.querySelectorAll('[data-slides]').forEach(function (box) {
+    var track = box.querySelector('.sol__track');
+    var total = track.children.length;
+    if (total < 2 || reduceMotion) return;
+    var clone = track.children[0].cloneNode(true);
+    clone.alt = ''; clone.setAttribute('aria-hidden', 'true');
+    track.appendChild(clone);
+
+    var dots = document.createElement('div');
+    dots.className = 'sol__dots'; dots.setAttribute('aria-hidden', 'true');
+    for (var k = 0; k < total; k++) dots.appendChild(document.createElement('span'));
+    box.appendChild(dots);
+
+    var i = 0, timer = null, onScreen = false;
+    function show(n, animate) {
+      track.style.transition = animate ? '' : 'none';
+      track.style.transform = 'translateX(' + (-100 * n) + '%)';
+      [].forEach.call(dots.children, function (d, j) { d.classList.toggle('is-active', j === n % total); });
+    }
+    function next() {
+      if (i >= total) { i = 0; show(0, false); void track.offsetWidth; } // volta da cópia, caso o fim da animação tenha se perdido
+      i++; show(i, true);
+    }
+    track.addEventListener('transitionend', function () { if (i === total) { i = 0; show(0, false); } });
+    function start() { if (!timer && onScreen && !document.hidden) timer = setInterval(next, 5000); }
+    function stop() { clearInterval(timer); timer = null; }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        onScreen = entries[0].isIntersecting; onScreen ? start() : stop();
+      }, { threshold: 0.3 }).observe(box);
+    } else { onScreen = true; start(); }
+    document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+    show(0, false);
+  });
 })();

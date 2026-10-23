@@ -38,7 +38,6 @@ Os principais:
 ## O que falta você trocar (nesta ordem)
 Já estão com foto real: topo (par antes/depois sobre foto de obra clara), "Trocar ou recuperar", "Como funciona", "Serviços", "Por que a RPR" (funcionário recortado, `funcionario-politriz.webp`), fundo do topo (`hero-bg-obra.jpg` no desktop, `hero-bg-obra-mobile.jpg` no celular) e do CTA, terraço (para quem atendemos), 4 pares de resultados, logo, favicon e imagem de compartilhamento.
 1. **Fotos que ainda são provisórias** (cinza com o nome escrito): `atende-residencial.jpg`, `atende-comercio-industria.jpg`, `atende-construtoras.jpg`. Salve a foto real **com o mesmo nome** por cima (800x600, deitada).
-   Na dobra 3 (Nossas soluções): `servico-inox-acm.jpg`, `servico-vidros.jpg`, `servico-limpeza.jpg`, `servico-pos-incendio.jpg`. Mesmo esquema, mas **1200x675** (deitada, 16:9). Depois confira o `alt` de cada uma no `index.html`.
 2. **Resultados 03 e 04** (rampa e calçada) vieram de artes do Instagram, em baixa resolução. Troque por fotos originais, 800x1000 (em pé), mesmo enquadramento e luz no antes e no depois.
 3. **Mais pares de resultados**: copie um `<li class="carousel__slide card">` inteiro na dobra 4, troque os nomes das imagens e a legenda.
 4. **Legendas dos pares**: hoje só dizem a superfície ("Bancada de granito preto"). Acrescente o serviço feito.
