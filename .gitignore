@@ -1,0 +1,8 @@
+# Claude Code (configurações, skills e arquivos locais do assistente)
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+.mcp.json
+skills-lock.json
+# capturas de tela dos testes no navegador (Playwright)
+.playwright-mcp/
