@@ -1,10 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 262" role="img" aria-label="Mapa do estado de Alagoas com as cidades de Maceió, Marechal Deodoro, Arapiraca, Barra de São Miguel e Barra de Santo Antônio marcadas">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 262" role="img" aria-label="Mapa do estado de Alagoas com as cidades de Maceió, Marechal Deodoro, Arapiraca, Barra de São Miguel, Barra de Santo Antônio, Ipioca, Paripueira, Sonho Verde e São Miguel dos Milagres marcadas">
 <title>Estado de Alagoas</title>
-<style>.uf{fill:rgba(235,235,235,.08);stroke:#94989D;stroke-width:1.5;stroke-linejoin:round}.pin{fill:#25D366;stroke:#0A0F2E;stroke-width:2}.halo{fill:rgba(37,211,102,.25)}</style>
+<style>.uf{fill:rgba(235,235,235,.08);stroke:#94989D;stroke-width:1.5;stroke-linejoin:round}.pin{fill:#25D366;stroke:#0A0F2E;stroke-width:1.5}.halo{fill:rgba(37,211,102,.25)}</style>
 <path class="uf" d="M36.18 109.44L34.19 102.16 20.03 94.39 15.55 95.28 5.38 92.39 0 78.44 0 78.44 13.16 67.77 19.53 56.91 41.16 49.34 64.88 16.54 65.78 9.67 73.95 3.69 83.92 15.85 100.56 18.84 111.33 17.64 136.74 37.77 155.68 58.9 173.42 69.37 192.46 74.15 217.38 67.67 248.67 70.56 260.33 69.47 278.87 58.9 290.43 59.4 308.47 48.34 330.2 25.51 331.4 21.03 346.84 8.67 366.78 6.28 389.1 14.75 414.62 1.89 429.27 0 448.41 8.07 477.31 10.76 480 12.86 480 12.86 452.29 62.29 406.94 113.42 371.26 149.1 340.96 194.75 307.77 223.46 297.81 243.69 284.65 261.53 284.65 261.53 278.67 248.47 242.89 226.25 238.31 225.95 221.76 218.07 204.22 203.62 191.26 179.2 137.24 148.6 100.56 139.14Z"/>
-<circle class="halo" cx="389.3" cy="132.4" r="11"/><circle class="pin" cx="389.3" cy="132.4" r="5"/>
-<circle class="halo" cx="364.2" cy="139.2" r="11"/><circle class="pin" cx="364.2" cy="139.2" r="5"/>
-<circle class="halo" cx="245.2" cy="145.7" r="11"/><circle class="pin" cx="245.2" cy="145.7" r="5"/>
-<circle class="halo" cx="363.2" cy="159.5" r="11"/><circle class="pin" cx="363.2" cy="159.5" r="5"/>
-<circle class="halo" cx="424.6" cy="91.8" r="11"/><circle class="pin" cx="424.6" cy="91.8" r="5"/>
+<!-- posição: x = 389,3 + (longitude + 35,735) × 155,6 ; y = 132,4 − (latitude + 9,666) × 155,6. Halos primeiro, pinos por cima -->
+<circle class="halo" cx="245.2" cy="145.7" r="9"/>
+<circle class="halo" cx="364.2" cy="139.2" r="9"/>
+<circle class="halo" cx="363.2" cy="159.5" r="9"/>
+<circle class="halo" cx="389.3" cy="132.4" r="9"/>
+<circle class="halo" cx="410.2" cy="111.2" r="9"/>
+<circle class="halo" cx="417.8" cy="101.0" r="9"/>
+<circle class="halo" cx="421.0" cy="96.8" r="9"/>
+<circle class="halo" cx="424.6" cy="91.8" r="9"/>
+<circle class="halo" cx="445.0" cy="70.0" r="9"/>
+<circle class="pin" cx="245.2" cy="145.7" r="4"><title>Arapiraca</title></circle>
+<circle class="pin" cx="364.2" cy="139.2" r="4"><title>Marechal Deodoro</title></circle>
+<circle class="pin" cx="363.2" cy="159.5" r="4"><title>Barra de São Miguel</title></circle>
+<circle class="pin" cx="389.3" cy="132.4" r="4"><title>Maceió</title></circle>
+<circle class="pin" cx="410.2" cy="111.2" r="4"><title>Ipioca</title></circle>
+<circle class="pin" cx="417.8" cy="101.0" r="4"><title>Paripueira</title></circle>
+<circle class="pin" cx="421.0" cy="96.8" r="4"><title>Sonho Verde</title></circle>
+<circle class="pin" cx="424.6" cy="91.8" r="4"><title>Barra de Santo Antônio</title></circle>
+<circle class="pin" cx="445.0" cy="70.0" r="4"><title>São Miguel dos Milagres</title></circle>
 </svg>
