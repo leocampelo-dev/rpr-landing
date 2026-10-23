@@ -6,3 +6,5 @@ CLAUDE.local.md
 skills-lock.json
 # capturas de tela dos testes no navegador (Playwright)
 .playwright-mcp/
+# editor (VS Code)
+.vscode/
