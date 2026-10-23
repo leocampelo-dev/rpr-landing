@@ -36,14 +36,13 @@ Os principais:
 - **Faixa de números** (`.proofband`): "1M m² recuperados", "+10 anos de experiência", "100% de satisfação", entre Resultados e Como funciona.
 
 ## O que falta você trocar (nesta ordem)
-Já estão com foto real: topo (par antes/depois sobre foto de obra clara), "Trocar ou recuperar", "Como funciona", "Serviços", "Por que a RPR" (funcionário recortado, `funcionario-politriz.webp`), fundo do topo (`hero-bg-obra.jpg` no desktop, `hero-bg-obra-mobile.jpg` no celular) e do CTA, terraço (para quem atendemos), 4 pares de resultados, logo, favicon e imagem de compartilhamento.
-1. **Fotos que ainda são provisórias** (cinza com o nome escrito): `atende-residencial.jpg`, `atende-comercio-industria.jpg`, `atende-construtoras.jpg`. Salve a foto real **com o mesmo nome** por cima (800x600, deitada).
-2. **Resultados 03 e 04** (rampa e calçada) vieram de artes do Instagram, em baixa resolução. Troque por fotos originais, 800x1000 (em pé), mesmo enquadramento e luz no antes e no depois.
-3. **Mais pares de resultados**: copie um `<li class="carousel__slide card">` inteiro na dobra 4, troque os nomes das imagens e a legenda.
-4. **Legendas dos pares**: hoje só dizem a superfície ("Bancada de granito preto"). Acrescente o serviço feito.
-5. **Link das avaliações do Google** (dobra 7, link "Ver todas as avaliações no Google" abaixo do botão): procure `TODO` no `index.html` e coloque o link direto do Perfil.
-6. **FAQ**: faltam 4 respostas da Sheila (móveis, apartamento, duração do resultado, piso sem recuperação). Estão em comentário `TODO` na dobra 10.
-7. **Domínio**: `recuperapisosrpr.com` está no canonical, no Open Graph, no `robots.txt` e no `sitemap.xml`. Confira se é o endereço final.
+Já estão com foto real: topo (par antes/depois sobre foto de obra clara), "Trocar ou recuperar", "Como funciona", "Serviços", "Por que a RPR" (funcionário recortado, `funcionario-politriz.webp`), fundo do topo (`hero-bg-obra.jpg` no desktop, `hero-bg-obra-mobile.jpg` no celular) e do CTA, os 4 cards de "Quem atendemos", 4 pares de resultados, logo, favicon e imagem de compartilhamento.
+1. **Resultados 03 e 04** (rampa e calçada) vieram de artes do Instagram, em baixa resolução. Troque por fotos originais, 800x1000 (em pé), mesmo enquadramento e luz no antes e no depois.
+2. **Mais pares de resultados**: copie um `<li class="carousel__slide card">` inteiro na dobra 4, troque os nomes das imagens e a legenda.
+3. **Legendas dos pares**: hoje só dizem a superfície ("Bancada de granito preto"). Acrescente o serviço feito.
+4. **Link das avaliações do Google** (dobra 7, link "Ver todas as avaliações no Google" abaixo do botão): procure `TODO` no `index.html` e coloque o link direto do Perfil.
+5. **FAQ**: faltam 4 respostas da Sheila (móveis, apartamento, duração do resultado, piso sem recuperação). Estão em comentário `TODO` na dobra 10.
+6. **Domínio**: `recuperapisosrpr.com` está no canonical, no Open Graph, no `robots.txt` e no `sitemap.xml`. Confira se é o endereço final.
 - Se mudar uma imagem para `.webp`, troque a extensão no `index.html`.
 - Regra dos pares: antes e depois com o mesmo enquadramento e luz, sem filtro.
 
